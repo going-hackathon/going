@@ -19,7 +19,7 @@ public enum ErrorCode {
 	FILE_EMPTY_ERROR(HttpStatus.BAD_REQUEST, "F-0000", "File Empty Error"),
 	FILE_UPLOAD_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "F-0001", "File Upload Error"),
 	FILE_MAX_UPLOAD_SIZE_EXCEED(HttpStatus.INTERNAL_SERVER_ERROR, "F-0002", "File Upload Size Exceeded"),
-	PIN_NOT_FOUND(HttpStatus.NOT_FOUND, "P-000", "Pin not founded");
+	TRAVEL_NOT_FOUND(HttpStatus.NOT_FOUND, "T-000", "Travel not founded");
 
 	private final HttpStatus status;
 	private final String code;

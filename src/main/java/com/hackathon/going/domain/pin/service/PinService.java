@@ -35,7 +35,7 @@ public class PinService {
 
     private Travel getTravel(Long travelId) {
         return travelRepository.findById(travelId)
-                .orElseThrow(() -> new NotFoundException(ErrorCode.PIN_NOT_FOUND));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.TRAVEL_NOT_FOUND));
     }
 
 }
