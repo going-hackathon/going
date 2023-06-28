@@ -2,6 +2,7 @@ package com.hackathon.going.domain.image.entity;
 
 import com.hackathon.going.domain.common.BaseEntity;
 import com.hackathon.going.domain.pin.entity.Pin;
+import com.hackathon.going.domain.post.entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,4 +28,15 @@ public class Image extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "pin_id")
     private Pin pin;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
+
+    public void setPost(Post post) {
+        this.post = post;
+
+        if(!post.getImages().contains(this))
+            post.getImages().add(this);
+    }
 }
