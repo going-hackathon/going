@@ -1,7 +1,7 @@
 package com.hackathon.going.domain.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.hackathon.going.domain.user.User;
+import com.hackathon.going.domain.user.entity.User;
 import com.hackathon.going.domain.user.constant.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

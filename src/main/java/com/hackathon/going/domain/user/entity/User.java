@@ -1,4 +1,4 @@
-package com.hackathon.going.domain.user;
+package com.hackathon.going.domain.user.entity;
 
 import com.hackathon.going.domain.common.BaseEntity;
 import com.hackathon.going.domain.user.constant.UserRole;
