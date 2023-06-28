@@ -1,28 +1,27 @@
 package com.hackathon.going.global.config;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class SwaggerConfig {
+public class SwaggerConfig implements WebMvcConfigurer {
+
+    private static final String API_TITLE = "Going API";
+    private static final String API_DESCRIPTION = "Going API 문서";
+    private static final String API_VERSION = "Version 0.0.1";
 
     @Bean
-    public GroupedOpenApi publicApi() {
-        return GroupedOpenApi.builder()
-                .group("v1")
-                .pathsToMatch("/**")
-                .build();
-    }
-
-    @Bean
-    public OpenAPI springOpenAPI() {
+    public OpenAPI customOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("Going")
-                        .description("Going Server API 명세서입니다.")
-                        .version("v0.0.1"));
+                .components(new Components())
+                .info(new Info()
+                        .title(API_TITLE)
+                        .description(API_DESCRIPTION)
+                        .version(API_VERSION));
     }
 
 }
