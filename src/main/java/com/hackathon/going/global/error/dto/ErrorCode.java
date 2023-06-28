@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
 	INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "C-000", "Internal Server Error"),
+	S3_FILE_UPLOAD_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "C-001", "S3 File Upload Failed"),
 	DUPLICATED_USER_ACCOUNT_ID(HttpStatus.CONFLICT, "U-000", "User Account Id is duplicated"),
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "U-001", "User not founded"),
 	INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "U-002", "Password is invalid"),
