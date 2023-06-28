@@ -1,4 +1,4 @@
-package com.hackathon.going.domain.travel.controller;
+package com.hackathon.going.domain.post.controller;
 
 import com.hackathon.going.domain.common.ResponseDto;
 import com.hackathon.going.domain.post.dto.PostDto;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/travel")
+@RequestMapping("/api/posts")
 @RequiredArgsConstructor
-public class TravelController {
+public class PostController {
 
     private final TravelService travelService;
     private final PostService postService;
