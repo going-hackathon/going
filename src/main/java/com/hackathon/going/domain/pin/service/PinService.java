@@ -26,7 +26,7 @@ public class PinService {
         Travel travel = getTravel(requestDto.getTravelId());
 
         Pin pin = Pin.builder()
-                .geography(point)
+                .point(point)
                 .travel(travel)
                 .build();
 
