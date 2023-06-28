@@ -13,6 +13,7 @@ public enum ErrorCode {
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND, "U-001", "User not founded"),
 	INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "U-002", "Password is invalid"),
 	INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "U-003", "Token is invalid"),
+	TRAVEL_NOT_FOUND(HttpStatus.NOT_FOUND, "T-001", "Travel not founded"),
 	INVALID_PERMISSION(HttpStatus.UNAUTHORIZED, "U-004", "Permission is invalid"),
 	FILE_EMPTY_ERROR(HttpStatus.BAD_REQUEST, "F-0000", "File Empty Error"),
 	FILE_UPLOAD_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "F-0001", "File Upload Error"),
