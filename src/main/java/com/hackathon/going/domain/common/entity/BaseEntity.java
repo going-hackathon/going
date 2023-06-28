@@ -1,4 +1,4 @@
-package com.hackathon.going.domain.common;
+package com.hackathon.going.domain.common.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
