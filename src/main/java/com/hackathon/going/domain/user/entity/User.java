@@ -1,4 +1,4 @@
-package com.hackathon.going.domain.user;
+package com.hackathon.going.domain.user.entity;
 
 import com.hackathon.going.domain.common.BaseEntity;
 import com.hackathon.going.domain.user.constant.UserRole;
@@ -19,6 +19,7 @@ public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     @Column(name = "user_account_id", nullable = false)
@@ -29,6 +30,7 @@ public class User extends BaseEntity {
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private UserRole role = UserRole.USER;
 
     @Column(name = "nickname")
