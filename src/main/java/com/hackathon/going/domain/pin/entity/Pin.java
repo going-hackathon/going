@@ -22,8 +22,8 @@ public class Pin extends BaseEntity {
     @Column(name = "pin_id")
     private Long id;
 
-    @Column(nullable = false, columnDefinition = "GEOMETRY")
-    private Point geography;
+    @Column(nullable = false, columnDefinition = "POINT")
+    private Point point;
 
     @ManyToOne
     @JoinColumn(name = "travel_id")

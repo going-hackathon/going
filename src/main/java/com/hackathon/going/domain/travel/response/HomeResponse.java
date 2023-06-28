@@ -1,7 +1,6 @@
 package com.hackathon.going.domain.travel.response;
 
-import com.hackathon.going.domain.post.dto.PostDto;
-import com.hackathon.going.domain.travel.dto.TravelDto;
+import com.hackathon.going.domain.post.response.PostResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,6 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 public class HomeResponse {
 
-    private TravelDto travel;
-    private List<PostDto> posts;
+    private TravelResponse travel;
+    private List<PostResponse> posts;
 }
