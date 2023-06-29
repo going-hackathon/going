@@ -1,6 +1,7 @@
 package com.hackathon.going.domain.pin.entity;
 
 import com.hackathon.going.domain.common.BaseEntity;
+import com.hackathon.going.domain.pin.constant.PinStatus;
 import com.hackathon.going.domain.travel.entity.Travel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,4 +29,8 @@ public class Pin extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "travel_id")
     private Travel travel;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private PinStatus status;
 }
