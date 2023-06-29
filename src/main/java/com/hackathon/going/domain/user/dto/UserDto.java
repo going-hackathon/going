@@ -1,6 +1,7 @@
 package com.hackathon.going.domain.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.hackathon.going.domain.user.constant.Gender;
 import com.hackathon.going.domain.user.entity.User;
 import com.hackathon.going.domain.user.constant.UserRole;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,8 @@ public class UserDto implements UserDetails {
     private String password;
     private UserRole userRole;
     private String nickname;
+    private String birthYear;
+    private Gender gender;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
@@ -35,6 +38,8 @@ public class UserDto implements UserDetails {
                 .password(entity.getPassword())
                 .userRole(entity.getRole())
                 .nickname(entity.getNickname())
+                .birthYear(entity.getBirthYear())
+                .gender(entity.getGender())
                 .createdAt(entity.getCreatedAt())
                 .modifiedAt(entity.getModifiedAt())
                 .build();

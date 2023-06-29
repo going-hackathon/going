@@ -1,6 +1,7 @@
 package com.hackathon.going.domain.user.entity;
 
 import com.hackathon.going.domain.common.BaseEntity;
+import com.hackathon.going.domain.user.constant.Gender;
 import com.hackathon.going.domain.user.constant.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,4 +36,11 @@ public class User extends BaseEntity {
 
     @Column(name = "nickname")
     private String nickname;
+
+    @Column(name = "birth_year")
+    private String birthYear;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender")
+    private Gender gender;
 }
