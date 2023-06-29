@@ -28,17 +28,7 @@ public class PinDto {
     private String content;
     private String title;
     private String address;
-    @JsonFormat(
-            shape = JsonFormat.Shape.STRING,
-            pattern = "yyyy-MM-dd HH:mm:ss",
-            locale = "Asia/Seoul"
-    )
     private LocalDateTime startDate;
-    @JsonFormat(
-            shape = JsonFormat.Shape.STRING,
-            pattern = "yyyy-MM-dd HH:mm:ss",
-            locale = "Asia/Seoul"
-    )
     private LocalDateTime endDate;
     private TravelDto travel;
     private PinStatus status;
