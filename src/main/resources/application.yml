@@ -39,6 +39,11 @@ cloud:
     stack:
       auto: false
 
+naver:
+  client:
+    id: ${NAVER_CLIENT_ID}
+    secret: ${NAVER_CLIENT_SECRET}
+
 ---
 spring:
   config:
