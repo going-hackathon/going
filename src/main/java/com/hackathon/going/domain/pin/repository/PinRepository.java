@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface PinRepository extends JpaRepository<Pin, Long> {
     Optional<Pin> findByTravelOrderByModifiedAt(Travel travel);
-    List<Pin> findAllByTravel(Travel travel);
+    List<Pin> findAllByTravelOrderByStartDate(Travel travel);
 }
