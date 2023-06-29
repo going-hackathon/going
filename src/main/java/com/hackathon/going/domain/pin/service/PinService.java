@@ -1,6 +1,10 @@
 package com.hackathon.going.domain.pin.service;
 
+<<<<<<< main
 import com.hackathon.going.domain.pin.dto.request.PinRequest;
+=======
+import com.hackathon.going.domain.pinImage.dto.PinImageDto;
+>>>>>>> feat: Pin Entity 등록을 위한 기초 작업
 import com.hackathon.going.domain.pinImage.entity.PinImage;
 import com.hackathon.going.domain.pinImage.repository.PinImageRepository;
 import com.hackathon.going.domain.pin.dto.PinDto;
@@ -8,8 +12,12 @@ import com.hackathon.going.domain.pin.entity.Pin;
 import com.hackathon.going.domain.pin.repository.PinRepository;
 import com.hackathon.going.domain.travel.entity.Travel;
 import com.hackathon.going.domain.travel.repository.TravelRepository;
+import com.hackathon.going.domain.user.dto.UserDto;
+import com.hackathon.going.domain.user.service.UserService;
 import com.hackathon.going.global.error.dto.ErrorCode;
 import com.hackathon.going.global.error.exception.NotFoundException;
+import com.hackathon.going.openai.drawing.KakaoImageService;
+import com.hackathon.going.openai.translation.PapagoTransService;
 import com.hackathon.going.s3.utils.AwsS3Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,8 +36,13 @@ public class PinService {
     private final AwsS3Utils awsS3Utils;
 
     @Transactional
+<<<<<<< main
     public void create(PinRequest requestDto) {
         Travel travel = getTravel(requestDto.getTravelId());
+=======
+    public PinDto create(Long travelId, Double latitude, Double longitude) {
+        Travel travel = getTravel(travelId);
+>>>>>>> feat: Pin Entity 등록을 위한 기초 작업
 
         Pin pin = Pin.builder()
                 .latitude(requestDto.getLatitude())
@@ -42,7 +55,8 @@ public class PinService {
                 .travel(travel)
                 .build();
 
-        pinRepository.save(pin);
+        Pin savedPin = pinRepository.save(pin);
+        return PinDto.fromEntity(savedPin);
     }
 
     @Transactional
