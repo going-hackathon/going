@@ -1,11 +1,10 @@
 package com.hackathon.going.search.service;
 
+import com.hackathon.going.global.util.GeoPoint;
+import com.hackathon.going.global.util.GeoTrans;
 import com.hackathon.going.search.dto.NaverLocationInfoDto;
 import com.hackathon.going.search.response.NaverLocationInfoListResponse;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.geographiclib.Geodesic;
-import net.sf.geographiclib.GeodesicData;
-import net.sf.geographiclib.GeodesicMask;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -113,17 +112,18 @@ public class NaverLocationSearchService implements SearchService {
             JSONObject itemObject = itemsArray.getJSONObject(i);
             String title = itemObject.getString("title").replaceAll("<[^>]*>", "");
             String address = itemObject.getString("address");
-            Double mapxDouble = Double.valueOf(itemObject.getString("mapx"));
-            Double mapyDouble = Double.valueOf(itemObject.getString("mapy"));
+            Double mapx = Double.valueOf(itemObject.getString("mapx"));
+            Double mapy = Double.valueOf(itemObject.getString("mapy"));
 
-            GeodesicData geo = Geodesic.WGS84.Direct(mapyDouble, mapxDouble, 0.0, GeodesicMask.LATITUDE | GeodesicMask.LONGITUDE);
+            // KATEC 좌표계 기준 데이터를 경도, 위도로 변환
+            GeoPoint geoPoint = GeoTrans.convert(GeoTrans.KATEC, GeoTrans.GEO, new GeoPoint(mapx, mapy));
 
             NaverLocationInfoDto naverLocationInfoDto
                     = NaverLocationInfoDto.builder()
                     .address(address)
                     .title(title)
-                    .latitude(geo.lat2)
-                    .longitude(geo.lon2)
+                    .latitude(geoPoint.getY())
+                    .longitude(geoPoint.getX())
                     .build();
             naverLocationInfoDtoList.add(naverLocationInfoDto);
         }
