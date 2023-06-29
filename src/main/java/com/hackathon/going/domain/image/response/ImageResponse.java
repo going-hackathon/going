@@ -1,5 +1,6 @@
 package com.hackathon.going.domain.image.response;
 
+import com.hackathon.going.domain.image.constant.ImgStatus;
 import com.hackathon.going.domain.image.dto.ImageDto;
 import com.hackathon.going.domain.pin.dto.response.PinResponse;
 import com.hackathon.going.domain.post.response.PostResponse;
@@ -16,6 +17,7 @@ public class ImageResponse {
     private String url;
     private PinResponse pin;
     private PostResponse post;
+    private ImgStatus status;
 
     public static ImageResponse fromDto(ImageDto dto) {
         return ImageResponse.builder()
@@ -23,6 +25,7 @@ public class ImageResponse {
                 .url(dto.getUrl())
                 .pin(PinResponse.fromDto(dto.getPin()))
                 .post(PostResponse.fromDto(dto.getPost()))
+                .status(dto.getStatus())
                 .build();
     }
 }
