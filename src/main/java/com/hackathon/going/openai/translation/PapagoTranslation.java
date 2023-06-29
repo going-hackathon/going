@@ -21,11 +21,6 @@ public class PapagoTranslation {
     private String clientSecret;
 
     public String getTransSentence(String target){
-        //애플리케이션 클라이언트 아이디값
-//        String clientId = "09j0gV6roAEn3UL1NKp9";
-
-        //애플리케이션 클라이언트 시크릿값
-//        String clientSecret = "qeXAp0srHw";
 
         String apiURL = "https://openapi.naver.com/v1/papago/n2mt";
         String text;
