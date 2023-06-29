@@ -1,7 +1,6 @@
 package com.hackathon.going.domain.pin.service;
 
 import com.hackathon.going.domain.pin.dto.PinDto;
-import com.hackathon.going.domain.pin.dto.request.PinRequestDto;
 import com.hackathon.going.domain.pin.entity.Pin;
 import com.hackathon.going.domain.pin.repository.PinRepository;
 import com.hackathon.going.domain.travel.entity.Travel;
@@ -20,12 +19,12 @@ public class PinService {
     private final TravelRepository travelRepository;
 
     @Transactional
-    public void create(PinRequestDto requestDto) {
-        Travel travel = getTravel(requestDto.getTravelId());
+    public void create(Long travelId, Double latitude, Double longitude) {
+        Travel travel = getTravel(travelId);
 
         Pin pin = Pin.builder()
-                .latitude(requestDto.getLatitude())
-                .longitude(requestDto.getLongitude())
+                .latitude(latitude)
+                .longitude(longitude)
                 .travel(travel)
                 .build();
 

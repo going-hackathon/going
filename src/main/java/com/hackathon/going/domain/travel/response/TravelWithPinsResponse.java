@@ -1,6 +1,6 @@
 package com.hackathon.going.domain.travel.response;
 
-import com.hackathon.going.domain.pin.resopnse.PinResponse;
+import com.hackathon.going.domain.pin.dto.response.PinResponse;
 import com.hackathon.going.domain.travel.dto.TravelWithPinsDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

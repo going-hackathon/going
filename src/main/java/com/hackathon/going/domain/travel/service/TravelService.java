@@ -30,7 +30,10 @@ public class TravelService {
 
         return TravelWithPinsDto.builder()
                 .travel(TravelDto.fromEntity(travel))
-                .pins(pins.stream().map(PinDto::fromEntity).collect(Collectors.toList()));
+                .pins(pins.stream()
+                        .map(PinDto::fromEntity)
+                        .collect(Collectors.toList()))
+                .build();
     }
 
     public TravelDto getMyTravel(String userAccountId) {

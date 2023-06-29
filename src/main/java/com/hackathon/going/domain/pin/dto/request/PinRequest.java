@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Validated
-public class PinRequestDto {
+public class PinRequest {
 
     @NotNull(message ="Travel Id is required")
     private Long travelId;
