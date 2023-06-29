@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
@@ -25,5 +26,15 @@ public class PinRequest {
     @IsLongitude
     @NotNull(message = "Longitude is required")
     private Double longitude;
+
+    private String content;
+
+    private String title;
+
+    private String address;
+
+    private LocalDateTime startDate;
+
+    private LocalDateTime endDate;
 
 }
