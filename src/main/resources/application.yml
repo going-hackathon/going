@@ -44,6 +44,10 @@ papago:
     id: ${PAPAGO_CLIENT_ID}
     SECRET: ${PAPAGO_CLIENT_SECRET}
 
+openai:
+  api:
+    key: ${OPEN_AI_API_KEY}
+
 ---
 spring:
   config:
@@ -86,7 +90,7 @@ spring:
     port: 6379
   jpa:
     hibernate:
-      #      ddl-auto: create
+#            ddl-auto: create
       ddl-auto: update
     show-sql: true
     properties:
