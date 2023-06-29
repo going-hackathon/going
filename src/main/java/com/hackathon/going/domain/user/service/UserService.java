@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -37,6 +38,7 @@ public class UserService {
         return JwtTokenUtils.generateToken(userAccountId, secretKey, expiredTimeMs);
     }
 
+    @Transactional
     public UserDto join(String userAccountId, String password, String nickname) {
         userRepository.findByUserAccountId(userAccountId).ifPresent(it -> {
             throw new BusinessException(ErrorCode.DUPLICATED_USER_ACCOUNT_ID);
