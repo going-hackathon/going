@@ -27,7 +27,7 @@ public class TravelService {
         Travel travel = travelRepository.findById(travelId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.TRAVEL_NOT_FOUND));
 
-        List<Pin> pins = pinRepository.findAllByTravel(travel);
+        List<Pin> pins = pinRepository.findAllByTravelOrderByStartDate(travel);
 
         return TravelWithPinsDto.builder()
                 .travel(TravelDto.fromEntity(travel))
