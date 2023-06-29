@@ -43,4 +43,8 @@ public class Image extends BaseEntity {
         if(!post.getImages().contains(this))
             post.getImages().add(this);
     }
+
+    public void setPin(Pin pin) {
+        this.pin = pin;
+    }
 }

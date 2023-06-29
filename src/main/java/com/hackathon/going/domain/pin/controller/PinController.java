@@ -9,8 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,5 +31,10 @@ public class PinController {
     public HttpEntity<PinResponse> getPin(@PathVariable Long pinId) {
         PinDto pin = pinService.getPin(pinId);
         return ResponseDto.ok(PinResponse.fromDto(pin));
+    }
+
+    @PostMapping("{pinId}")
+    public void updatePin(@PathVariable Long pinId, List<MultipartFile> files) {
+        pinService.update(pinId, files);
     }
 }
