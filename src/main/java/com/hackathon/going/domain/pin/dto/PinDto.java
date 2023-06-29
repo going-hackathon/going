@@ -1,6 +1,5 @@
 package com.hackathon.going.domain.pin.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.hackathon.going.domain.pin.constant.PinStatus;
 import com.hackathon.going.domain.pin.entity.Pin;
 import com.hackathon.going.domain.pinImage.dto.PinImageDto;
@@ -9,9 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
