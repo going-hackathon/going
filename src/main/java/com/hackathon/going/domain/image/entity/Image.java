@@ -1,6 +1,7 @@
 package com.hackathon.going.domain.image.entity;
 
 import com.hackathon.going.domain.common.BaseEntity;
+import com.hackathon.going.domain.image.constant.ImgStatus;
 import com.hackathon.going.domain.pin.entity.Pin;
 import com.hackathon.going.domain.post.entity.Post;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,9 @@ public class Image extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
+
+    @Enumerated(EnumType.STRING)
+    private ImgStatus status;
 
     public void setPost(Post post) {
         this.post = post;
