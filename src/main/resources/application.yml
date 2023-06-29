@@ -39,6 +39,11 @@ cloud:
     stack:
       auto: false
 
+papago:
+  client:
+    id: ${PAPAGO_CLIENT_ID}
+    SECRET: ${PAPAGO_CLIENT_SECRET}
+
 ---
 spring:
   config:
