@@ -2,6 +2,8 @@ package com.hackathon.going.domain.pin.entity;
 
 import com.hackathon.going.domain.common.BaseEntity;
 import com.hackathon.going.domain.pin.constant.PinStatus;
+import com.hackathon.going.domain.pinImage.entity.PinImage;
+import com.hackathon.going.domain.postImage.entity.PostImage;
 import com.hackathon.going.domain.travel.entity.Travel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Builder
@@ -36,6 +40,19 @@ public class Pin extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private PinStatus status = PinStatus.PLANNED;
+
+    @OneToMany(mappedBy = "pin",
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
+            orphanRemoval = true)
+    @Builder.Default
+    private List<PinImage> pinImages = new ArrayList<>();
+
+    public void addImage(PinImage pinImage) {
+        this.pinImages.add(pinImage);
+
+        if (pinImage.getPin() != this)
+            pinImage.setPin(this);
+    }
 
     public void changeStatus() {
         this.status = PinStatus.ARRIVED;

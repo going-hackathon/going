@@ -1,5 +1,5 @@
-package com.hackathon.going.domain.image.constant;
+package com.hackathon.going.domain.pinImage.constant;
 
-public enum ImgStatus {
+public enum PinImgStatus {
     CREATED, UPLOADED
 }

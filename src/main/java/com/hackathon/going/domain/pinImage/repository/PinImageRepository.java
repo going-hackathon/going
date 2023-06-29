@@ -1,9 +1,9 @@
-package com.hackathon.going.domain.image.repository;
+package com.hackathon.going.domain.pinImage.repository;
 
-import com.hackathon.going.domain.image.entity.Image;
+import com.hackathon.going.domain.pinImage.entity.PinImage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ImageRepository extends JpaRepository<Image, Long> {
+public interface PinImageRepository extends JpaRepository<PinImage, Long> {
 }

@@ -1,9 +1,8 @@
-package com.hackathon.going.domain.image.entity;
+package com.hackathon.going.domain.pinImage.entity;
 
 import com.hackathon.going.domain.common.BaseEntity;
-import com.hackathon.going.domain.image.constant.ImgStatus;
+import com.hackathon.going.domain.pinImage.constant.PinImgStatus;
 import com.hackathon.going.domain.pin.entity.Pin;
-import com.hackathon.going.domain.post.entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,12 +14,12 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "image")
+@Table(name = "pin_image")
 @Entity
-public class Image extends BaseEntity {
+public class PinImage extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "image_id")
+    @Column(name = "pin_image_id")
     private Long id;
 
     @Column(name = "url")
@@ -30,19 +29,8 @@ public class Image extends BaseEntity {
     @JoinColumn(name = "pin_id")
     private Pin pin;
 
-    @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
-
     @Enumerated(EnumType.STRING)
-    private ImgStatus status;
-
-    public void setPost(Post post) {
-        this.post = post;
-
-        if(!post.getImages().contains(this))
-            post.getImages().add(this);
-    }
+    private PinImgStatus status;
 
     public void setPin(Pin pin) {
         this.pin = pin;
