@@ -1,9 +1,8 @@
-package com.hackathon.going.domain.image.dto;
+package com.hackathon.going.domain.pinImage.dto;
 
-import com.hackathon.going.domain.image.constant.ImgStatus;
-import com.hackathon.going.domain.image.entity.Image;
+import com.hackathon.going.domain.pinImage.constant.PinImgStatus;
+import com.hackathon.going.domain.pinImage.entity.PinImage;
 import com.hackathon.going.domain.pin.dto.PinDto;
-import com.hackathon.going.domain.post.dto.PostDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,20 +12,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ImageDto {
+public class PinImageDto {
 
     private Long id;
     private String url;
     private PinDto pin;
-    private PostDto post;
-    private ImgStatus status;
+    private PinImgStatus status;
 
-    public static ImageDto fromEntity(Image entity) {
-        return ImageDto.builder()
+    public static PinImageDto fromEntity(PinImage entity) {
+        return PinImageDto.builder()
                 .id(entity.getId())
                 .url(entity.getUrl())
                 .pin(PinDto.fromEntity(entity.getPin()))
-                .post(PostDto.fromEntity(entity.getPost()))
                 .status(entity.getStatus())
                 .build();
     }

@@ -1,7 +1,7 @@
 package com.hackathon.going.domain.post.entity;
 
 import com.hackathon.going.domain.common.BaseEntity;
-import com.hackathon.going.domain.image.entity.Image;
+import com.hackathon.going.domain.postImage.entity.PostImage;
 import com.hackathon.going.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,12 +38,13 @@ public class Post extends BaseEntity {
     @OneToMany(mappedBy = "post",
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             orphanRemoval = true)
-    private List<Image> images = new ArrayList<>();
+    @Builder.Default
+    private List<PostImage> postImages = new ArrayList<>();
 
-    public void addImage(Image image) {
-        this.images.add(image);
+    public void addImage(PostImage postImage) {
+        this.postImages.add(postImage);
 
-        if (image.getPost() != this)
-            image.setPost(this);
+        if (postImage.getPost() != this)
+            postImage.setPost(this);
     }
 }

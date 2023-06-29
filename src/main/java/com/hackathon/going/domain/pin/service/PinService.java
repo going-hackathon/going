@@ -1,6 +1,7 @@
 package com.hackathon.going.domain.pin.service;
 
-import com.hackathon.going.domain.image.entity.Image;
+import com.hackathon.going.domain.pinImage.entity.PinImage;
+import com.hackathon.going.domain.pinImage.repository.PinImageRepository;
 import com.hackathon.going.domain.pin.dto.PinDto;
 import com.hackathon.going.domain.pin.entity.Pin;
 import com.hackathon.going.domain.pin.repository.PinRepository;
@@ -21,6 +22,7 @@ import java.util.List;
 public class PinService {
 
     private final PinRepository pinRepository;
+    private final PinImageRepository pinImageRepository;
     private final TravelRepository travelRepository;
     private final AwsS3Utils awsS3Utils;
 
@@ -44,12 +46,13 @@ public class PinService {
 
         // TODO : 이미지 업로드 시에 생성된 이미지는 삭제되도록
 
-        List<Image> images = awsS3Utils.uploadPinImage(pinId, files);
+        List<PinImage> pinImages = awsS3Utils.uploadPinImage(pinId, files);
 
-        if(!images.isEmpty()) {
-            for(Image image : images) {
-                image.setPin(pin);
+        if(!pinImages.isEmpty()) {
+            for(PinImage pinImage : pinImages) {
+                pinImage.setPin(pin);
             }
+            pinImageRepository.saveAll(pinImages);
         }
     }
 

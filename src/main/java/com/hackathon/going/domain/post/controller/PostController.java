@@ -33,7 +33,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createPost(Authentication authentication, @RequestBody PostCreateRequest request) {
+    public ResponseEntity<Void> createPost(Authentication authentication, PostCreateRequest request) {
         postService.create(request.getTitle(), request.getContent(), request.getFiles(), authentication.getName());
         return ResponseDto.noContent();
     }
