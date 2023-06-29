@@ -12,6 +12,7 @@ import com.hackathon.going.global.error.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +37,7 @@ public class TravelService {
                 .build();
     }
 
+    @Transactional
     public TravelDto getMyTravel(String userAccountId) {
         Travel travel = travelRepository.findByUser_UserAccountIdOrderByModifiedAtDesc(userAccountId)
                 .orElseThrow(() -> new NotFoundException(ErrorCode.TRAVEL_NOT_FOUND));
