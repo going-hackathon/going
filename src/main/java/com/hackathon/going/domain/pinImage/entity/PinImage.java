@@ -30,6 +30,7 @@ public class PinImage extends BaseEntity {
     private Pin pin;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "pin_image_status")
     private PinImgStatus status;
 
     public void setPin(Pin pin) {
