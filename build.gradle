@@ -45,6 +45,7 @@ dependencies {
 
 	implementation 'org.json:json:20220924'
 	implementation 'com.googlecode.json-simple:json-simple:1.1'
+	implementation 'net.sf.geographiclib:GeographicLib-Java:1.50'
 }
 
 tasks.named('test') {

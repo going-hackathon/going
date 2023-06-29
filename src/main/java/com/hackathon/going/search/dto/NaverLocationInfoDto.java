@@ -8,8 +8,11 @@ import lombok.*;
 public class NaverLocationInfoDto {
 
     private String title;
+
     private String address;
-    private String mapx;
-    private String mapy;
+
+    private Double latitude;
+
+    private Double longitude;
 
 }

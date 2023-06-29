@@ -1,5 +1,7 @@
 package com.hackathon.going.search.service;
 
+import com.hackathon.going.global.util.GeoPoint;
+import com.hackathon.going.global.util.GeoTrans;
 import com.hackathon.going.search.dto.NaverLocationInfoDto;
 import com.hackathon.going.search.response.NaverLocationInfoListResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -110,15 +112,18 @@ public class NaverLocationSearchService implements SearchService {
             JSONObject itemObject = itemsArray.getJSONObject(i);
             String title = itemObject.getString("title").replaceAll("<[^>]*>", "");
             String address = itemObject.getString("address");
-            String mapx = itemObject.getString("mapx");
-            String mapy = itemObject.getString("mapy");
+            Double mapx = Double.valueOf(itemObject.getString("mapx"));
+            Double mapy = Double.valueOf(itemObject.getString("mapy"));
+
+            // KATEC 좌표계 기준 데이터를 경도, 위도로 변환
+            GeoPoint geoPoint = GeoTrans.convert(GeoTrans.KATEC, GeoTrans.GEO, new GeoPoint(mapx, mapy));
 
             NaverLocationInfoDto naverLocationInfoDto
                     = NaverLocationInfoDto.builder()
                     .address(address)
                     .title(title)
-                    .mapx(mapx)
-                    .mapy(mapy)
+                    .latitude(geoPoint.getY())
+                    .longitude(geoPoint.getX())
                     .build();
             naverLocationInfoDtoList.add(naverLocationInfoDto);
         }
