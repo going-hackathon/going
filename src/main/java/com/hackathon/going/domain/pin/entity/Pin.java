@@ -3,14 +3,15 @@ package com.hackathon.going.domain.pin.entity;
 import com.hackathon.going.domain.common.BaseEntity;
 import com.hackathon.going.domain.pin.constant.PinStatus;
 import com.hackathon.going.domain.pinImage.entity.PinImage;
-import com.hackathon.going.domain.postImage.entity.PostImage;
 import com.hackathon.going.domain.travel.entity.Travel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,23 @@ public class Pin extends BaseEntity {
 
     @Column(name = "longitude", nullable = false)
     private Double longitude;
+
+    @Column(name = "content")
+    private String content;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "start_date")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime startDate;
+
+    @Column(name = "end_date")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime endDate;
 
     @ManyToOne
     @JoinColumn(name = "travel_id")
