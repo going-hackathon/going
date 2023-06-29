@@ -1,14 +1,14 @@
 package com.hackathon.going.domain.pin.controller;
 
 import com.hackathon.going.domain.common.ResponseDto;
+import com.hackathon.going.domain.pin.dto.PinDto;
 import com.hackathon.going.domain.pin.dto.request.PinRequestDto;
+import com.hackathon.going.domain.pin.resopnse.PinResponse;
 import com.hackathon.going.domain.pin.service.PinService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -25,4 +25,9 @@ public class PinController {
         return ResponseDto.noContent();
     }
 
+    @GetMapping("/{pinId}")
+    public HttpEntity<PinResponse> getPin(@PathVariable Long pinId) {
+        PinDto pin = pinService.getPin(pinId);
+        return ResponseDto.ok(PinResponse.fromDto(pin));
+    }
 }

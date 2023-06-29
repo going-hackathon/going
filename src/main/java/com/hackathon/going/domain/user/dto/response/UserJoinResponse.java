@@ -1,5 +1,6 @@
 package com.hackathon.going.domain.user.dto.response;
 
+import com.hackathon.going.domain.user.constant.Gender;
 import com.hackathon.going.domain.user.constant.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,4 +17,6 @@ public class UserJoinResponse {
     private String userAccountId;
     private UserRole role;
     private String nickname;
+    private String birthYear;
+    private Gender gender;
 }
