@@ -1,0 +1,34 @@
+version: "3.8"
+services:
+  going-redis:
+    container_name: going-redis
+    build:
+      dockerfile: Dockerfile
+      context: ./redis
+    image: moonsungkim/going-redis
+    labels:
+      - "name=redis"
+      - "mode=standalone"
+    platform: linux/amd64
+    ports:
+      - "6379:6379"
+  going-database:
+    container_name: going-database
+    build:
+      dockerfile: Dockerfile
+      context: ./database
+    image: moonsungkim/going-database
+    platform: linux/arm64
+    environment:
+      - MYSQL_DATABASE=eot
+      - MYSQL_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+      - TZ=Asia/Seoul
+    volumes:
+      - ./database/config:/etc/mysql/conf.d
+      - ./database/init:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    restart: always
