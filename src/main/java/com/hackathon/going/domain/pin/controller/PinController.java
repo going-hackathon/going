@@ -23,7 +23,7 @@ public class PinController {
 
     @PostMapping
     public ResponseEntity<Void> createPin(@Valid @RequestBody PinRequest requestDto) {
-        pinService.create(requestDto.getTravelId(), requestDto.getLatitude(), requestDto.getLongitude());
+        pinService.create(requestDto);
         return ResponseDto.noContent();
     }
 
