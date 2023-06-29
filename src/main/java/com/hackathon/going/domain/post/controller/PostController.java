@@ -10,6 +10,7 @@ import com.hackathon.going.domain.travel.response.HomeResponse;
 import com.hackathon.going.domain.travel.response.TravelResponse;
 import com.hackathon.going.domain.travel.service.TravelService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,15 +26,15 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
-    public ResponseDto<HomeResponse> home(Authentication authentication) {
+    public ResponseEntity<HomeResponse> home(Authentication authentication) {
         TravelDto myTravel = travelService.getMyTravel(authentication.getName());
         List<PostDto> posts = postService.getPosts();
-        return new ResponseDto<>(new HomeResponse(TravelResponse.fromDto(myTravel), posts.stream().map(PostResponse::fromDto).collect(Collectors.toList())));
+        return ResponseDto.ok(new HomeResponse(TravelResponse.fromDto(myTravel), posts.stream().map(PostResponse::fromDto).collect(Collectors.toList())));
     }
 
     @PostMapping
-    public ResponseDto<Void> createPost(Authentication authentication, @RequestBody PostCreateRequest request) {
+    public ResponseEntity<Void> createPost(Authentication authentication, @RequestBody PostCreateRequest request) {
         postService.create(request.getTitle(), request.getContent(), request.getFiles(), authentication.getName());
-        return new ResponseDto<>();
+        return ResponseDto.noContent();
     }
 }

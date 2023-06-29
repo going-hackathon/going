@@ -8,6 +8,7 @@ import com.hackathon.going.domain.user.dto.response.UserJoinResponse;
 import com.hackathon.going.domain.user.dto.response.UserLoginResponse;
 import com.hackathon.going.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,15 +22,15 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public ResponseDto<UserLoginResponse> login(@RequestBody UserLoginRequest request) {
+    public ResponseEntity<UserLoginResponse> login(@RequestBody UserLoginRequest request) {
         String token = userService.login(request.getUserAccountId(), request.getPassword());
-        return new ResponseDto<>(new UserLoginResponse(token));
+        return ResponseDto.ok(new UserLoginResponse(token));
     }
 
     @PostMapping("/join")
-    public ResponseDto<UserJoinResponse> join(@RequestBody UserJoinRequest request) {
+    public ResponseEntity<UserJoinResponse> join(@RequestBody UserJoinRequest request) {
         UserDto userDto = userService.join(request.getUserAccountId(), request.getPassword(), request.getNickname());
-        return new ResponseDto<>(UserJoinResponse.builder()
+        return ResponseDto.ok(UserJoinResponse.builder()
                 .id(userDto.getId())
                 .userAccountId(userDto.getUsername())
                 .role(userDto.getUserRole())

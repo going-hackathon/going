@@ -1,12 +1,12 @@
 package com.hackathon.going.domain.pin.entity;
 
 import com.hackathon.going.domain.common.BaseEntity;
+import com.hackathon.going.domain.pin.constant.PinStatus;
 import com.hackathon.going.domain.travel.entity.Travel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.locationtech.jts.geom.Point;
 
 import javax.persistence.*;
 
@@ -22,10 +22,22 @@ public class Pin extends BaseEntity {
     @Column(name = "pin_id")
     private Long id;
 
-    @Column(nullable = false, columnDefinition = "POINT")
-    private Point point;
+    @Column(name = "latitude", nullable = false)
+    private Double latitude;
+
+    @Column(name = "longitude", nullable = false)
+    private Double longitude;
 
     @ManyToOne
     @JoinColumn(name = "travel_id")
     private Travel travel;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private PinStatus status = PinStatus.PLANNED;
+
+    public void changeStatus() {
+        this.status = PinStatus.ARRIVED;
+    }
 }

@@ -1,7 +1,7 @@
 package com.hackathon.going.domain.image.response;
 
 import com.hackathon.going.domain.image.dto.ImageDto;
-import com.hackathon.going.domain.pin.resopnse.PinResponse;
+import com.hackathon.going.domain.pin.dto.response.PinResponse;
 import com.hackathon.going.domain.post.response.PostResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
