@@ -1,7 +1,8 @@
 package com.hackathon.going.domain.post.dto;
 
-import com.hackathon.going.domain.image.dto.ImageDto;
+import com.hackathon.going.domain.pinImage.dto.PinImageDto;
 import com.hackathon.going.domain.post.entity.Post;
+import com.hackathon.going.domain.postImage.dto.PostImageDto;
 import com.hackathon.going.domain.user.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +21,7 @@ public class PostDto {
     private UserDto user;
     private String title;
     private String content;
-    private List<ImageDto> images;
+    private List<PostImageDto> images;
 
     public static PostDto fromEntity(Post entity) {
         return PostDto.builder()
@@ -28,7 +29,7 @@ public class PostDto {
                 .user(UserDto.fromEntity(entity.getUser()))
                 .title(entity.getTitle())
                 .content(entity.getContent())
-                .images(entity.getImages().stream().map(ImageDto::fromEntity)
+                .images(entity.getPostImages().stream().map(PostImageDto::fromEntity)
                         .collect(Collectors.toList()))
                 .build();
     }

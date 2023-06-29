@@ -1,10 +1,10 @@
 package com.hackathon.going.domain.post.service;
 
-import com.hackathon.going.domain.image.entity.Image;
-import com.hackathon.going.domain.image.repository.ImageRepository;
 import com.hackathon.going.domain.post.dto.PostDto;
 import com.hackathon.going.domain.post.entity.Post;
 import com.hackathon.going.domain.post.repository.PostRepository;
+import com.hackathon.going.domain.postImage.entity.PostImage;
+import com.hackathon.going.domain.postImage.repository.PostImageRepository;
 import com.hackathon.going.domain.user.entity.User;
 import com.hackathon.going.domain.user.repository.UserRepository;
 import com.hackathon.going.global.error.dto.ErrorCode;
@@ -23,7 +23,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final ImageRepository imageRepository;
+    private final PostImageRepository postImageRepository;
     private final AwsS3Utils awsS3Utils;
 
     public List<PostDto> getPosts() {
@@ -38,13 +38,13 @@ public class PostService {
                 .content(content)
                 .build();
 
-        List<Image> images = awsS3Utils.uploadPostImage(userAccountId, files);
+        List<PostImage> postImages = awsS3Utils.uploadPostImage(userAccountId, files);
 
-        if(!images.isEmpty()) {
-            for(Image image : images) {
-                post.addImage(image);
+        if(!postImages.isEmpty()) {
+            for(PostImage postImage : postImages) {
+                post.addImage(postImage);
             }
-            imageRepository.saveAll(images);
+            postImageRepository.saveAll(postImages);
         }
 
         postRepository.save(post);
