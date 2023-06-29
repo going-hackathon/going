@@ -32,5 +32,10 @@ public class Pin extends BaseEntity {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private PinStatus status;
+    @Builder.Default
+    private PinStatus status = PinStatus.PLANNED;
+
+    public void changeStatus() {
+        this.status = PinStatus.ARRIVED;
+    }
 }

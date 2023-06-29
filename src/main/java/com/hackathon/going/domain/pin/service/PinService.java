@@ -1,6 +1,7 @@
 package com.hackathon.going.domain.pin.service;
 
 import com.hackathon.going.domain.common.util.GeomUtil;
+import com.hackathon.going.domain.pin.dto.PinDto;
 import com.hackathon.going.domain.pin.dto.request.PinRequestDto;
 import com.hackathon.going.domain.pin.entity.Pin;
 import com.hackathon.going.domain.pin.repository.PinRepository;
@@ -31,6 +32,12 @@ public class PinService {
                 .build();
 
         pinRepository.save(pin);
+    }
+
+    public PinDto getPin(Long pinId) {
+        Pin pin = pinRepository.findById(pinId)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.PIN_NOT_FOUND));
+        return PinDto.fromEntity(pin);
     }
 
     private Travel getTravel(Long travelId) {
