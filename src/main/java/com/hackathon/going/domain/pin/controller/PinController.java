@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/pins")
+@RequestMapping("/api/pins")
 public class PinController {
 
     private final PinService pinService;
