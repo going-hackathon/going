@@ -1,5 +1,6 @@
 package com.hackathon.going.domain.pin.service;
 
+import com.hackathon.going.domain.pin.dto.request.PinRequest;
 import com.hackathon.going.domain.pinImage.entity.PinImage;
 import com.hackathon.going.domain.pinImage.repository.PinImageRepository;
 import com.hackathon.going.domain.pin.dto.PinDto;
@@ -27,12 +28,17 @@ public class PinService {
     private final AwsS3Utils awsS3Utils;
 
     @Transactional
-    public void create(Long travelId, Double latitude, Double longitude) {
-        Travel travel = getTravel(travelId);
+    public void create(PinRequest requestDto) {
+        Travel travel = getTravel(requestDto.getTravelId());
 
         Pin pin = Pin.builder()
-                .latitude(latitude)
-                .longitude(longitude)
+                .latitude(requestDto.getLatitude())
+                .longitude(requestDto.getLongitude())
+                .content(requestDto.getContent())
+                .title(requestDto.getTitle())
+                .address(requestDto.getAddress())
+                .startDate(requestDto.getStartDate())
+                .endDate(requestDto.getEndDate())
                 .travel(travel)
                 .build();
 
