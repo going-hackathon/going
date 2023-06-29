@@ -29,12 +29,14 @@ public class UserController {
 
     @PostMapping("/join")
     public ResponseEntity<UserJoinResponse> join(@RequestBody UserJoinRequest request) {
-        UserDto userDto = userService.join(request.getUserAccountId(), request.getPassword(), request.getNickname());
+        UserDto userDto = userService.join(request.getUserAccountId(), request.getPassword(), request.getNickname(), request.getBirthYear(), request.getGender());
         return ResponseDto.ok(UserJoinResponse.builder()
                 .id(userDto.getId())
                 .userAccountId(userDto.getUsername())
                 .role(userDto.getUserRole())
                 .nickname(userDto.getNickname())
+                .birthYear(userDto.getBirthYear())
+                .gender(userDto.getGender())
                 .build());
     }
 }

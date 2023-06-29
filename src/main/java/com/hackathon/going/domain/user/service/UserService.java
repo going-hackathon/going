@@ -1,5 +1,6 @@
 package com.hackathon.going.domain.user.service;
 
+import com.hackathon.going.domain.user.constant.Gender;
 import com.hackathon.going.domain.user.dto.UserDto;
 import com.hackathon.going.domain.user.entity.User;
 import com.hackathon.going.domain.user.repository.UserRepository;
@@ -31,7 +32,7 @@ public class UserService {
     public String login(String userAccountId, String password) {
         UserDto userDto = customUserService.loadUserByUsername(userAccountId);
 
-        if(!passwordEncoder.matches(password, userDto.getPassword())) {
+        if (!passwordEncoder.matches(password, userDto.getPassword())) {
             throw new BusinessException(ErrorCode.INVALID_PASSWORD);
         }
 
@@ -39,15 +40,17 @@ public class UserService {
     }
 
     @Transactional
-    public UserDto join(String userAccountId, String password, String nickname) {
+    public UserDto join(String userAccountId, String password, String nickname, String birthYear, Gender gender) {
         userRepository.findByUserAccountId(userAccountId).ifPresent(it -> {
             throw new BusinessException(ErrorCode.DUPLICATED_USER_ACCOUNT_ID);
-                });
+        });
 
         User user = userRepository.save(User.builder()
                 .userAccountId(userAccountId)
                 .password(passwordEncoder.encode(password))
                 .nickname(nickname)
+                .birthYear(birthYear)
+                .gender(gender)
                 .build());
 
         return UserDto.fromEntity(user);
