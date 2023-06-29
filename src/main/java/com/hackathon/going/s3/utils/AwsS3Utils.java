@@ -5,7 +5,8 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.hackathon.going.domain.image.entity.Image;
+import com.hackathon.going.domain.pinImage.entity.PinImage;
+import com.hackathon.going.domain.postImage.entity.PostImage;
 import com.hackathon.going.global.error.dto.ErrorCode;
 import com.hackathon.going.global.error.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +34,8 @@ public class AwsS3Utils {
     private static final String S3_POST_DIRECTORY_NAME = "post";
     private static final String S3_PIN_DIRECTORY_NAME = "pin";
 
-    public List<Image> uploadPostImage(String userAccountId, List<MultipartFile> files) {
-        List<Image> images = new ArrayList<>();
+    public List<PostImage> uploadPostImage(String userAccountId, List<MultipartFile> files) {
+        List<PostImage> postImages = new ArrayList<>();
 
         for(MultipartFile file : files) {
             // 메타데이터 설정
@@ -57,13 +58,13 @@ public class AwsS3Utils {
                 throw new BusinessException(ErrorCode.FILE_UPLOAD_ERROR);
             }
             String imageUrl = amazonS3Client.getUrl(bucket, fileName).toString();
-            images.add(Image.builder().url(imageUrl).build());
+            postImages.add(PostImage.builder().url(imageUrl).build());
         }
-        return images;
+        return postImages;
     }
 
-    public List<Image> uploadPinImage(Long pinId, List<MultipartFile> files) {
-        List<Image> images = new ArrayList<>();
+    public List<PinImage> uploadPinImage(Long pinId, List<MultipartFile> files) {
+        List<PinImage> pinImages = new ArrayList<>();
 
         for(MultipartFile file : files) {
             // 메타데이터 설정
@@ -86,9 +87,9 @@ public class AwsS3Utils {
                 throw new BusinessException(ErrorCode.FILE_UPLOAD_ERROR);
             }
             String imageUrl = amazonS3Client.getUrl(bucket, fileName).toString();
-            images.add(Image.builder().url(imageUrl).build());
+            pinImages.add(PinImage.builder().url(imageUrl).build());
         }
-        return images;
+        return pinImages;
     }
 
     public void deleteImage(String imageUrl) {
