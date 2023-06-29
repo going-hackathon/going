@@ -30,7 +30,8 @@ public class AwsS3Utils {
 
     private final AmazonS3Client amazonS3Client;
 
-    private static final String S3_USER_DIRECTORY_NAME = "images";
+    private static final String S3_POST_DIRECTORY_NAME = "post";
+    private static final String S3_PIN_DIRECTORY_NAME = "pin";
 
     public List<Image> uploadPostImage(String userAccountId, List<MultipartFile> files) {
         List<Image> images = new ArrayList<>();
@@ -46,7 +47,36 @@ public class AwsS3Utils {
             int idx = originalFileName.lastIndexOf(".");
             String extension =  originalFileName.substring(idx + 1);
 
-            String fileName = S3_USER_DIRECTORY_NAME + "/" + UUID.randomUUID() + "." + extension;
+            String fileName = S3_POST_DIRECTORY_NAME + "/" + UUID.randomUUID() + "." + extension;
+
+            try (InputStream inputStream = file.getInputStream()) {
+                amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
+                        .withCannedAcl(CannedAccessControlList.PublicRead));
+            } catch (IOException e) {
+                log.error("S3 파일 업로드에 실패하였습니다. {}", ErrorCode.S3_FILE_UPLOAD_FAILED.getMessage());
+                throw new BusinessException(ErrorCode.FILE_UPLOAD_ERROR);
+            }
+            String imageUrl = amazonS3Client.getUrl(bucket, fileName).toString();
+            images.add(Image.builder().url(imageUrl).build());
+        }
+        return images;
+    }
+
+    public List<Image> uploadPinImage(Long pinId, List<MultipartFile> files) {
+        List<Image> images = new ArrayList<>();
+
+        for(MultipartFile file : files) {
+            // 메타데이터 설정
+            ObjectMetadata objectMetadata = new ObjectMetadata();
+            objectMetadata.setContentType(file.getContentType());
+            objectMetadata.setContentLength(file.getSize());
+
+            // 저장할 S3 버킷 디렉토리명 설정
+            String originalFileName = file.getOriginalFilename();
+            int idx = originalFileName.lastIndexOf(".");
+            String extension =  originalFileName.substring(idx + 1);
+
+            String fileName = S3_PIN_DIRECTORY_NAME + "/" + UUID.randomUUID() + "." + extension;
 
             try (InputStream inputStream = file.getInputStream()) {
                 amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, inputStream, objectMetadata)
@@ -62,7 +92,7 @@ public class AwsS3Utils {
     }
 
     public void deleteImage(String imageUrl) {
-        String fileKey = S3_USER_DIRECTORY_NAME + "/" + imageUrl.split("/")[4];
+        String fileKey = S3_POST_DIRECTORY_NAME + "/" + imageUrl.split("/")[4];
         if (amazonS3Client.doesObjectExist(bucket, fileKey)) {
             amazonS3Client.deleteObject(new DeleteObjectRequest(bucket, fileKey));
         }
