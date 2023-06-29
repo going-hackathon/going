@@ -44,9 +44,9 @@ public class PostService {
             for(PostImage postImage : postImages) {
                 post.addImage(postImage);
             }
-            postImageRepository.saveAll(postImages);
         }
 
         postRepository.save(post);
+        postImageRepository.saveAll(postImages);
     }
 }
