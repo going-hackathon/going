@@ -3,6 +3,9 @@ package com.hackathon.going.search.service;
 import com.hackathon.going.search.dto.NaverLocationInfoDto;
 import com.hackathon.going.search.response.NaverLocationInfoListResponse;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.geographiclib.Geodesic;
+import net.sf.geographiclib.GeodesicData;
+import net.sf.geographiclib.GeodesicMask;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -110,15 +113,17 @@ public class NaverLocationSearchService implements SearchService {
             JSONObject itemObject = itemsArray.getJSONObject(i);
             String title = itemObject.getString("title").replaceAll("<[^>]*>", "");
             String address = itemObject.getString("address");
-            String mapx = itemObject.getString("mapx");
-            String mapy = itemObject.getString("mapy");
+            Double mapxDouble = Double.valueOf(itemObject.getString("mapx"));
+            Double mapyDouble = Double.valueOf(itemObject.getString("mapy"));
+
+            GeodesicData geo = Geodesic.WGS84.Direct(mapyDouble, mapxDouble, 0.0, GeodesicMask.LATITUDE | GeodesicMask.LONGITUDE);
 
             NaverLocationInfoDto naverLocationInfoDto
                     = NaverLocationInfoDto.builder()
                     .address(address)
                     .title(title)
-                    .mapx(mapx)
-                    .mapy(mapy)
+                    .latitude(geo.lat2)
+                    .longitude(geo.lon2)
                     .build();
             naverLocationInfoDtoList.add(naverLocationInfoDto);
         }
