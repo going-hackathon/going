@@ -8,6 +8,7 @@ import com.hackathon.going.domain.user.dto.response.UserJoinResponse;
 import com.hackathon.going.domain.user.dto.response.UserLoginResponse;
 import com.hackathon.going.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +22,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public ResponseDto<UserLoginResponse> login(@RequestBody UserLoginRequest request) {
+    public ResponseEntity<UserLoginResponse> login(@RequestBody UserLoginRequest request) {
         String token = userService.login(request.getUserAccountId(), request.getPassword());
-        return new ResponseDto<>(new UserLoginResponse(token));
+        return ResponseDto.ok(new UserLoginResponse(token));
     }
 
     @PostMapping("/join")
