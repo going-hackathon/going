@@ -55,4 +55,10 @@ public class UserService {
 
         return UserDto.fromEntity(user);
     }
+
+    public UserDto findUser(String userAccountId) {
+        User user = userRepository.findByUserAccountId(userAccountId)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.USER_NOT_FOUND));
+        return UserDto.fromEntity(user);
+    }
 }

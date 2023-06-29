@@ -48,6 +48,11 @@ openai:
   api:
     key: ${OPEN_AI_API_KEY}
 
+kakao:
+  rest:
+    api:
+      key: ${KAKAO_REST_API_KEY}
+
 ---
 spring:
   config:
@@ -55,9 +60,9 @@ spring:
       on-profile: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/going
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://going.c5l0tfogmvlj.ap-northeast-2.rds.amazonaws.com:3306/going?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    username: root
+    password: 12345678
   redis:
     host: localhost
     port: 6379
@@ -82,9 +87,9 @@ spring:
       on-profile: prod
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/going
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://going.c5l0tfogmvlj.ap-northeast-2.rds.amazonaws.com:3306/going?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    username: root
+    password: 12345678
   redis:
     host: localhost
     port: 6379

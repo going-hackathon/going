@@ -1,5 +1,7 @@
 package com.hackathon.going.openai.translation;
 
+import com.hackathon.going.domain.user.constant.Gender;
+import com.hackathon.going.domain.user.dto.UserDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -8,11 +10,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class PapagoTranslation {
+public class PapagoTransService {
 
     @Value("${papago.client.id}")
     private String clientId;
@@ -35,6 +38,14 @@ public class PapagoTranslation {
         requestHeaders.put("X-Naver-Client-Secret", clientSecret);
 
         return post(apiURL, requestHeaders, text);
+    }
+
+    public String makePrompt(UserDto user, String address) {
+        String prompt = "korean, human, picture, photo, enjoy, travel, ";
+        prompt += (LocalDateTime.now().getYear() - Integer.parseInt(user.getBirthYear()))/10*10 + "s ";
+        prompt += user.getGender() == Gender.MALE ? "man, " : "woman, ";
+        prompt += "on " + address.replaceAll("\"", "");
+        return prompt;
     }
 
     private static String post(String apiUrl, Map<String, String> requestHeaders, String text){
