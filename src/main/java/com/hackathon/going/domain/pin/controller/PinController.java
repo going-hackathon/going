@@ -31,7 +31,7 @@ public class PinController {
 
     @PostMapping
     public ResponseEntity<Void> createPin(@Valid @RequestBody PinRequest request, Authentication authentication) throws Exception {
-        PinDto pin = pinService.create(request.getTravelId(), request.getLatitude(), request.getLongitude());
+        PinDto pin = pinService.create(request);
         UserDto user = userService.findUser(authentication.getName());
         String address = papagoTransService.getTransSentence(request.getAddress().split(" ")[0]);
         String text = papagoTransService.makePrompt(user, address);
