@@ -23,17 +23,17 @@ spring:
       max-request-size: 20MB
 
 jwt:
-  secret-key: ${JWT_KEY}
+  secret-key: going-trackton.going_project_2023_secret_key
   token:
     expired-time-ms: 2592000000
 
 cloud:
   aws:
     credentials:
-      access-key: ${AWS_ACCESS_KEY}
-      secret-key: ${AWS_SECRET_KEY}
+      access-key: AKIAUQ4BJWFQFK3WRZFY
+      secret-key: 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
     s3:
-      bucket: ${S3_BUCKET_NAME}
+      bucket: going-hackaton
     region:
       static: ap-northeast-2
     stack:
@@ -41,17 +41,17 @@ cloud:
 
 papago:
   client:
-    id: ${PAPAGO_CLIENT_ID}
-    SECRET: ${PAPAGO_CLIENT_SECRET}
+    id: 09j0gV6roAEn3UL1NKp9
+    secret: qeXAp0srHw
+
+naver:
+  client:
+    id: fYGQS21hC2R50RVBcuVe
+    secret: XOv7tUVyq7
 
 openai:
   api:
-    key: ${OPEN_AI_API_KEY}
-
-kakao:
-  rest:
-    api:
-      key: ${KAKAO_REST_API_KEY}
+    key: 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
 
 ---
 spring:
@@ -60,9 +60,9 @@ spring:
       on-profile: local
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://going.c5l0tfogmvlj.ap-northeast-2.rds.amazonaws.com:3306/going?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
-    username: root
-    password: 12345678
+    url: jdbc:mysql://localhost:3306/going
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   redis:
     host: localhost
     port: 6379
@@ -88,14 +88,14 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://going.c5l0tfogmvlj.ap-northeast-2.rds.amazonaws.com:3306/going?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
-    username: root
-    password: 12345678
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
   redis:
     host: localhost
     port: 6379
   jpa:
     hibernate:
-#            ddl-auto: create
+      #            ddl-auto: create
       ddl-auto: update
     show-sql: true
     properties:
